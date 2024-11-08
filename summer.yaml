@@ -110,20 +110,6 @@ proxy-groups:
       - 美国
       - 英国
       - AllServer
-  - name: BiliBili
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png
-    proxies:
-      - DIRECT
-      - Proxy
-      - 香港
-      - 台湾
-      - 日本
-      - 韩国
-      - 新加坡
-      - 美国
-      - 英国
-      - AllServer
   - name: Spotify
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
@@ -481,7 +467,6 @@ rules:
   - RULE-SET,Netflix,NETFLIX
   - RULE-SET,Emby,Emby
   - RULE-SET,TikTok,TikTok
-  - RULE-SET,BiliBili,BiliBili
   - RULE-SET,Spotify,Spotify
   - RULE-SET,NetEaseMusic,NetEaseMusic
   - RULE-SET,ProxyMedia,Streaming
