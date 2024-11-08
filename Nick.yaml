@@ -1,477 +1,280 @@
+# 𝐥𝐚𝐨𝐬𝐡𝐮@𝐒𝐭𝐚𝐬𝐡 自用配置
+# 𝐔𝐩𝐝𝐚𝐭𝐞： 2024.08.07 1
+
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+mode: Rule
+log-level: info
+ipv6: true
+external-controller: :9090
+
+# > 机场流量信息
+subscribe-url: https://sub.store/download/Server1
+
 proxy-providers:
-  Provider-1:
-    interval: 600
-    url: http://sub.store/download/Provider-1?target=Stash
-  Provider-2:
-    interval: 600
-    url: http://sub.store/download/Provider-2?target=Stash
-  Provider-3:
-    interval: 600
-    url: http://sub.store/download/Provider-3?target=Stash
-  Provider-4:
-    interval: 600
-    url: http://sub.store/download/Provider-4?target=Stash
-mode: rule
+  All:
+    type: http
+    url: "https://sub.store/download/collection/AllServer"
+    interval: 86400
+    path: ./all.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: http://cp.cloudflare.com/generate_204
+
 dns:
+  enable: true
+  ipv6: true
+  listen: 0.0.0.0:53
   default-nameserver:
+    - 119.29.29.29
     - 223.5.5.5
-    - 119.28.28.28
-    - system
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - localhost.ptlogin2.qq.com
+    - '+.srv.nintendo.net'
+    - '+.stun.playstation.net'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - '+.xboxlive.com'
+    - 'msftconnecttest.com'
+    - 'xbox.*.microsoft.com'
+    - '*.battlenet.com.cn'
+    - '*.battlenet.com'
+    - '*.blzstatic.cn'
+    - '*.battle.net'
   nameserver:
-    - https://1.12.12.12/dns-query
-    - https://223.5.5.5/dns-query
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
 proxies:
-  - name: 直连
-    type: DIRECT
-    udp: true
+            
 proxy-groups:
-  - name: 默认节点
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png
+  - name: 手动切换
     type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png
+    use:
+      - All
     proxies:
       - 自动选择
-      - 直连
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-  # 功能分组
-  - name: OpenAI
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: Google
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Google_Search.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: Apple
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Apple.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: Telegram
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: Microsoft
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Microsoft.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: 哔哩东南亚
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/bilibili_3.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: 巴哈姆特
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Bahamut.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: YouTube
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/YouTube.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: NETFLIX
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Netflix.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: Spotify
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Spotify.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: Disney+
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Disney+.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: TikTok
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/TikTok.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: Steam
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Steam.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  - name: 国内网站
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/StreamingCN.png
-    type: select
-    proxies:
-      - 直连
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-  - name: 其他外网
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Streaming!CN.png
-    type: select
-    proxies:
-      - 默认节点
-      - HK 香港
-      - TW 台湾省
-      - JP 日本
-      - KR 韩国
-      - US 美国
-      - SG 新加坡
-      #      - TK 土耳其
-      - 其它地区
-      - 全部节点
-      - 自动选择
-      - 直连
-  # 基于地区分组
-  - name: HK 香港
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
-    type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-    filter: "(?i)(澳门|🇲🇴|港|🇭🇰|hk|hong)"
-  - name: TW 台湾省
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China.png
-    type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-    filter: "(?i)(台|🇹🇼|湾|tw|taiwan)"
-  - name: JP 日本
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png
-    type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-    filter: "(?i)(日|🇯🇵|东京|大阪|jp|japan)"
-  - name: KR 韩国
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Korea.png
-    type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-    filter: "(?i)(韩|🇰🇷|kr|korea)"
-  - name: US 美国
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png
-    type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-    filter: "(?i)(美|🇺🇲|us|states|america)"
-  - name: SG 新加坡
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png
-    type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-    filter: "(?i)(新加坡|坡|狮城|🇸🇬|sg|singapore)"
-  #  - name: TK 土耳其
-  #    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Turkey.png
-  #    type: select
-  #    include-all: true
-  #    filter: "土耳其|🇹🇷|TK|(?i)turkey"
-  - name: 其它地区
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/World_Map.png
-    type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-    filter: "(?i)^(?!.*(?:🇭🇰|🇹🇼|🇯🇵|🇰🇷|🇺🇸|🇸🇬|🇨🇳|港|hk|hong|台|tw|taiwan|日本|jp|japan|韩|kr|korea|美|us|states|新加坡|sg|singapore)).*"
+      - 故障转移
+
   - name: 自动选择
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png
     type: url-test
-    include-all: true
-    interval: 120
-    tolerance: 50
-    lazy: true
-  - name: 全部节点
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    use: 
+       - All
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+    
+  - name: 故障转移
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bypass.png
+    url: 'http://www.gstatic.com/generate_204'
+    interval: 300
+    use: 
+       - All
+
+  - name: 国内网站
     type: select
-    include-all: true
-rules:
-  - SCRIPT,quic,REJECT
-  - RULE-SET,category-ai-chat-!cn,OpenAI
-  - RULE-SET,telegram,Telegram
-  - RULE-SET,biliintl,哔哩东南亚
-  - RULE-SET,bahamut,巴哈姆特
-  - RULE-SET,youtube,YouTube
-  - RULE-SET,netflix,NETFLIX
-  - RULE-SET,spotify,Spotify
-  - RULE-SET,disney,Disney+
-  - RULE-SET,tiktok,TikTok
-  - RULE-SET,steam@cn,国内网站
-  - RULE-SET,steam,Steam
-  - RULE-SET,pixiv,其他外网
-  - RULE-SET,google-cn,Google
-  - RULE-SET,apple-cn,Apple
-  - RULE-SET,microsoft@cn,国内网站
-  - RULE-SET,microsoft,Microsoft
-  - GEOIP,LAN,直连,no-resolve
-  - GEOIP,CN,国内网站,no-resolve
-  - MATCH,其他外网
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png
+    proxies: 
+      - DIRECT
+      - 手动切换
+      - 自动选择
+      - 故障转移
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 韩国节点
+      - 狮城节点
+      - 美国节点
+      - 其他节点
+      
+  - name: 国外网站
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+    proxies: 
+      - 手动切换
+      - 自动选择
+      - 故障转移
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 韩国节点
+      - 狮城节点
+      - 美国节点
+      - 其他节点
+      - DIRECT
+
+  - name: 香港节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+    use:
+      - All
+    filter: 港|🇭🇰|HK|(?i)Hong
+
+  - name: 台湾节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+    use:
+      - All
+    filter: 台|🇹🇼|TW|(?i)Taiwan
+    
+  - name: 日本节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    use:
+      - All
+    filter: 日|🇯🇵|JP|(?i)Japan
+     
+  - name: 狮城节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    use:
+      - All
+    filter: 坡|🇸🇬|狮城|SG|(?i)Singapore
+
+  - name: 美国节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    use:
+      - All
+    filter: 美|🇺🇸|US|(?i)States|American
+     
+  - name: 韩国节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
+    use:
+      - All
+    filter: 韩|🇰🇷|韓|KR|KOR|(?i)Korea
+    
+  - name: 其他节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+    use:
+      - All
+    filter: ^((?!🇭🇰|港|HK|Hong|🇹🇼|台|TW|Tai|🇯🇵|日|JP|Japan|🇸🇬|坡|狮城|SG|Singapore|🇰🇷|韩|KR|KOR|Korea|🇺🇸|美|US|States|American).)*$
+    
 rule-providers:
-  category-ai-chat-!cn:
+  # 远程规则集
+
+  Adblock:
     type: http
-    interval: 86400
     behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-chat-!cn.list
-  telegram:
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AdvertisingLite/AdvertisingLite_Domain.yaml"
+    path: ./ruleset/AdDomain.yaml
+    interval: 86400
+        
+  Apple:
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml"
+    path: ./ruleset/Apple.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.list
-  biliintl:
+
+  Google:
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml"
+    path: ./ruleset/Google.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/biliintl.list
-  bahamut:
+    
+  Microsoft:
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml"
+    path: ./ruleset/Microsoft.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/bahamut.list
-  youtube:
+
+  WeChat:
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/WeChat/WeChat.yaml"
+    path: ./ruleset/WeChat.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/youtube.list
-  netflix:
+
+  Telegram:
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml"
+    path: ./ruleset/Telegram.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/netflix.list
-  spotify:
+
+  OpenAI:
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml"
+    path: ./ruleset/OpenAI.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/spotify.list
-  disney:
+    
+  Twitter: 
     type: http
+    behavior: classical
+    url: https://raw.githubusercontents.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml
+    path: ./ruleset/Twitter.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/disney.list
-  tiktok:
+
+  YouTube:
     type: http
+    behavior: classical
+    url: https://raw.githubusercontents.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml
+    path: ./ruleset/YouTube.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/tiktok.list
-  steam@cn:
+
+  TikTok: 
     type: http
+    behavior: classical
+    url: https://raw.githubusercontents.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml
+    path: ./ruleset/TikTok.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/steam@cn.list
-  steam:
+
+  Streaming: # 国际媒体
     type: http
+    behavior: classical
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyMedia.yaml
+    path: ./ruleset/Streaming.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/steam.list
-  pixiv:
+    
+  China:
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China.yaml"
+    path: ./ruleset/China.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/pixiv.list
-  google-cn:
+
+  Global:
     type: http
-    interval: 86400
     behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google-cn.list
-  apple-cn:
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt"
+    path: ./ruleset/Global.yaml
+    interval: 86400
+
+  Lan: # 局域网
     type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml"
+    path: ./ruleset/lan.yaml
     interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple-cn.list
-  microsoft@cn:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft@cn.list
-  microsoft:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: text
-    url: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.list
-script:
-  shortcuts:
-    quic: network == 'udp' and dst_port == 443
+    
+rules:
+  # 分流规则引用
+  - RULE-SET,Adblock,REJECT
+  - RULE-SET,Apple,国内网站
+  - RULE-SET,Google,国外网站  
+  - RULE-SET,Microsoft,国内网站
+  - RULE-SET,WeChat,国内网站
+  - RULE-SET,OpenAI,国外网站
+  - RULE-SET,Telegram,国外网站
+  - RULE-SET,Twitter,国外网站  
+  - RULE-SET,YouTube,国外网站
+  - RULE-SET,TikTok,国外网站  
+  - RULE-SET,Streaming,国外网站  
+  - RULE-SET,China,国内网站  
+  - RULE-SET,Global,国外网站
+  - RULE-SET,Lan,DIRECT
+  - GEOIP,CN,国内网站
+  - MATCH,国外网站
