@@ -115,8 +115,15 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png
     proxies:
       - DIRECT
-      - HongKong
-      - TaiWan
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 韩国
+      - 新加坡
+      - 美国
+      - 英国
+      - AllServer
   - name: Spotify
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
