@@ -1,0 +1,486 @@
+# 通用设置
+mode: rule
+log-level: info
+# DNS模块
+dns:
+  default-nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+  nameserver:
+    - https://223.5.5.5/dns-query
+    - https://120.53.53.53/dns-query
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    # 服务提供商:
+proxy-providers:
+  Subscribe:
+    url: https://hongxingdl.com/hxvip?token=d90f78a78d9ad2714908db242012d20f # 用你的订阅链接替换
+    interval: 86400
+    benchmark-url: http://cp.cloudflare.com
+    benchmark-timeout: 5
+    # 功能分组
+
+    filter: ^(?=.*(.))(?!.*((?i)官网|订阅|流量|到期|剩余|更新)).*$
+proxy-groups:
+  - name: 手动选择
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Airport.png
+    include-all: true
+    filter: ^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|(\b(USE|USED|TOTAL|Traffic|Expire|EMAIL|Panel|Channel|Author)\b|(\d{4}-\d{2}-\d{2}|\d+G)))).*$
+  - icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Auto.png
+    include-all: true
+    name: 自动选择
+    type: url-test
+  - name: Proxy
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png
+    proxies:
+      - DIRECT
+      - 手动选择
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+      - 其他地区
+  - name: AI
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+    proxies:
+      - 手动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+  - name: Copilot
+    proxies:
+      - 自动选择
+      - 手动选择
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Copilot.png
+  - name: Apple
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png
+    proxies:
+      - DIRECT
+      - 手动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+  - name: Microsoft
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Windows_11.png
+    proxies:
+      - DIRECT
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+      - 手动选择
+  - name: Google
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+    proxies:
+      - 手动选择
+      - 自动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+  - name: YouTube
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+    proxies:
+      - 手动选择
+      - 自动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+  - name: Spotify
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+    proxies:
+      - 自动选择
+      - 手动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+      - 其他地区
+  - name: Telegram
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram_X.png
+    proxies:
+      - 自动选择
+      - 手动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+  - name: X
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/X.png
+    proxies:
+      - 手动选择
+      - 自动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+  - name: NETFLIX
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+    proxies:
+      - 手动选择
+      - 自动选择
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+  - name: Emby
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+    proxies:
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+      - 手动选择
+      - DIRECT
+  - name: Streaming
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming.png
+    proxies:
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+      - 手动选择
+  - name: Games
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
+    proxies:
+      - Proxy
+      - 香港
+      - 台湾
+      - 日本
+      - 新加坡
+      - 美国
+      - 手动选择
+      - DIRECT
+  - name: Final
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+    proxies:
+      - Proxy
+      - DIRECT
+  # 基于地区分组
+  - name: 香港
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+    proxies:
+      - HK-Auto
+      - HK-FallBack
+      - HK-LoadBalance
+    filter: 港|🇭🇰|HK|(?i)Hong
+    use:
+      - Subscribe
+  - name: 台湾
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+    proxies:
+      - TW-Auto
+      - TW-FallBack
+      - TW-LoadBalance
+    filter: 台|🇨🇳|🇹🇼|湾|TW|(?i)Taiwan
+    use:
+      - Subscribe
+  - name: 日本
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    proxies:
+      - JP-Auto
+      - JP-FallBack
+      - JP-LoadBalance
+    filter: 日|🇯🇵|东京|JP|(?i)Japan
+    use:
+      - Subscribe
+  - name: 新加坡
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    proxies:
+      - SG-Auto
+      - SG-FallBack
+      - SG-LoadBalance
+    filter: 新加坡|坡|狮城|🇸🇬|SG|(?i)Singapore
+    use:
+      - Subscribe
+  - name: 美国
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    proxies:
+      - US-Auto
+      - US-FallBack
+      - US-LoadBalance
+    filter: 美|🇺🇲|US|(?i)States|American
+    use:
+      - Subscribe
+  - filter: ^((?!🇭🇰|港|HK|Hong|🇹🇼|台|TW|Tai|🇯🇵|日|JP|Japan|🇸🇬|坡|狮城|SG|Singapore|🇺🇸|美|US|States|American).)*$
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+    include-all: true
+    name: 其他地区
+    type: select
+  - name: HK-Auto
+    type: url-test
+    hidden: true
+    include-all: true
+    filter: 港|🇭🇰|HK|(?i)Hong
+    interval: 300
+    lazy: true
+  - name: TW-Auto
+    type: url-test
+    hidden: true
+    include-all: true
+    filter: 台|🇨🇳|🇹🇼|湾|TW|(?i)Taiwan
+    interval: 300
+    lazy: true
+  - name: JP-Auto
+    type: url-test
+    hidden: true
+    include-all: true
+    filter: 日|🇯🇵|东京|JP|(?i)Japan
+    interval: 300
+    lazy: true
+  - name: SG-Auto
+    type: url-test
+    hidden: true
+    include-all: true
+    filter: 新加坡|坡|狮城|🇸🇬|SG|(?i)Singapore
+    interval: 300
+    lazy: true
+  - name: US-Auto
+    type: url-test
+    hidden: true
+    include-all: true
+    filter: 美|🇺🇲|US|(?i)States|American
+    interval: 300
+    lazy: true
+  - name: HK-FallBack
+    type: fallback
+    hidden: true
+    include-all: true
+    filter: 港|🇭🇰|HK|(?i)Hong
+    interval: 300
+    lazy: true
+  - name: TW-FallBack
+    type: fallback
+    hidden: true
+    include-all: true
+    filter: 台|🇨🇳|🇹🇼|湾|TW|(?i)Taiwan
+    interval: 300
+    lazy: true
+  - name: JP-FallBack
+    type: fallback
+    hidden: true
+    include-all: true
+    filter: 日|🇯🇵|东京|JP|(?i)Japan
+    interval: 300
+    lazy: true
+  - name: SG-FallBack
+    type: fallback
+    hidden: true
+    include-all: true
+    filter: 新加坡|坡|狮城|🇸🇬|SG|(?i)Singapore
+    interval: 300
+    lazy: true
+  - name: US-FallBack
+    type: fallback
+    hidden: true
+    include-all: true
+    filter: 美|🇺🇲|US|(?i)States|American
+    interval: 300
+    lazy: true
+  - name: HK-LoadBalance
+    type: load-balance
+    hidden: true
+    include-all: true
+    filter: 港|🇭🇰|HK|(?i)Hong
+    strategy: consistent-hashing
+    interval: 300
+    lazy: true
+  - name: TW-LoadBalance
+    type: load-balance
+    hidden: true
+    include-all: true
+    filter: 台|🇨🇳|🇹🇼|湾|TW|(?i)Taiwan
+    strategy: consistent-hashing
+    interval: 300
+    lazy: true
+  - name: JP-LoadBalance
+    type: load-balance
+    hidden: true
+    include-all: true
+    filter: 日|🇯🇵|东京|JP|(?i)Japan
+    strategy: consistent-hashing
+    interval: 300
+    lazy: true
+  - name: SG-LoadBalance
+    type: load-balance
+    hidden: true
+    include-all: true
+    filter: 新加坡|坡|狮城|🇸🇬|SG|(?i)Singapore
+    strategy: consistent-hashing
+    interval: 300
+    lazy: true
+  - name: US-LoadBalance
+    type: load-balance
+    hidden: true
+    include-all: true
+    filter: 美|🇺🇲|US|(?i)States|American
+    strategy: consistent-hashing
+    interval: 300
+    lazy: true
+rules:
+  - RULE-SET,Copilot,Copilot
+  - RULE-SET,AI,AI
+  - RULE-SET,YouTube,YouTube
+  - RULE-SET,Netflix,NETFLIX
+  - RULE-SET,Emby,Emby
+  - RULE-SET,Spotify,Spotify
+  - RULE-SET,ProxyMedia,Streaming
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Twitter,X
+  - RULE-SET,GitHub,Proxy
+  - RULE-SET,AppleProxyService,美国
+  - RULE-SET,Apple,Apple
+  - RULE-SET,Google,Google
+  - RULE-SET,Microsoft,Microsoft
+  - RULE-SET,Games,Games
+  - RULE-SET,ProxyGFW,Proxy
+  - RULE-SET,CN_Mainland,DIRECT
+  - RULE-SET,China,DIRECT
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Final
+rule-providers:
+  AI:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/AI.list
+  YouTube:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/YouTube.list
+  Netflix:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Netflix.list
+  Emby:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Emby.list
+  Spotify:
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
+  ProxyMedia:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/ProxyMedia.list
+  Telegram:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Telegram.list
+  GitHub:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Github.list
+  Twitter:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Twitter.list
+  AppleProxyService:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/AppleProxyService.list
+  Apple:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Apple.list
+  Google:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Google.list
+  Microsoft:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Microsoft.list
+  Games:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/Game.list
+  CN_Mainland:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/ChinaDomain.list
+  ProxyGFW:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/Rules/ProxyGFW.list
+  China:
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China.list
+  Copilot:
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot_No_Resolve.yaml
